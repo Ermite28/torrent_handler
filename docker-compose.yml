@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
+  listener:
+    build: entry_point
+    volumes:
+      - ./entry_point:/entry_point
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  api:
+    build: api
+    volumes:
+      - ./api:/api:z
+    ports:
+      - 5000:5000
