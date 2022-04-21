@@ -24,3 +24,7 @@ async def post_torrent(new_torent: Request):
 @torrent_handler_router.get("/scrap_by_name/{name}")
 async def scrap_by_name(name: str, site="yts", limit=20):
     return requests.request("GET", settings.TORRENT_SCRAPPER_URL+f"/api/v1/search?site={site}&query={name}&limit={limit}").json()
+
+@torrent_handler_router.get("/search_movies_by_name/{name}")
+async def search_movies_by_name(name:str, language="fr-EU"):
+    return requests.request("GET", settings.TMDB_URL+ f"/3/search/movie?api_key={settings.TMDB_KEY}&language={language}&query={name}").json()
