@@ -1,14 +1,13 @@
 FROM python:3.10
 
-COPY ./requirements.txt /api/requirements.txt
+COPY requirements.txt requirements.txt
 
-WORKDIR /api
+RUN pip install -r requirements.txt 
 
-RUN pip3 install -r requirements.txt
-ENV FLASK_APP=api.py
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=development
+EXPOSE 80
 
-COPY . /api
+COPY ./backend /backend
 
-CMD ["flask", "run"]
+WORKDIR /backend
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]

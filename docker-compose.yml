@@ -20,4 +20,22 @@ services:
     volumes:
       - ./api:/api:z
     ports:
-      - 5000:5000
+      - 80:80
+  
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - WHITELIST=
+    volumes:
+      - ./transmission/config:/config:z
+      - ./transmission/downloads:/downloads:z
+      - ./transmission/watch:/watch:z
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
