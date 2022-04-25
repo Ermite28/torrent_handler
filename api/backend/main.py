@@ -5,7 +5,7 @@ from apis.general_pages.route_homepage import general_pages_router
 from apis.torrent_handler import torrent_handler_router
 
 origins = [
-    "http://localhost",
+    "*"
 ]
 
 def include_router(app):
