@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Grid from "@mui/material/Grid";
 import ApiConnector from './api_connectors/torrent_routes'
 import {Movie} from './Movie'
 
@@ -43,8 +44,8 @@ export function SearchBox() {
     height: '100vh'
   }}>
     <SearchBar updateMovies={updateMovies} />
-    <ul>
+    <Grid container spacing={0.5}>
       {movies.map((movie) => (<Movie movie={movie}/>))}
-    </ul>
+    </Grid>
   </Box>
 }
