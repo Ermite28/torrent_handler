@@ -6,7 +6,7 @@ import {SearchBox} from "./download_components/SearchBox"
 
 
 export default function App() {
-  return <Container maxWidth="sl" >
+  return <Container maxWidth="sl">
     <SearchBox/>
   </Container>;
 }

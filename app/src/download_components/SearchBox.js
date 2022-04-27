@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField'
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 import Grid from "@mui/material/Grid";
-import ApiConnector from './api_connectors/torrent_routes'
-import {Movie} from './Movie'
+import {searchMovies} from './api_connectors/torrent_routes'
+import { Movie } from './Movie'
 
 
 function SearchBar(props) {
@@ -14,21 +13,23 @@ function SearchBar(props) {
       "language": "fr-EU"
     }
   )
-  
-  let apiConnector = new ApiConnector();    
-  
-  const searchMovies = (searchValue) => {
+
+
+  const handleTextChange = (searchValue) => {
     setQuery({ ...query, query: searchValue })
     if (query.query.length > 2) {
-      apiConnector.searchMovies(query).then((response) => {
+      searchMovies(query).then((response) => {
         props.updateMovies(response.results)
       })
     }
 
   }
 
-  return <Container maxWidth="sm">
-    <TextField hiddenLabel fullWidth id="filled-hidden-label-large fullWidth" variant="filled" onChange={(e) => searchMovies(e.target.value)} />
+  return <Container maxWidth="lg" sx={{
+    pb: "50px",
+    pt: "10px"
+  }}>
+    <TextField hiddenLabel autoFocus fullWidth id="filled-hidden-label-large fullWidth" variant="filled" onChange={(e) => handleTextChange(e.target.value)}/>
   </Container>
 }
 
@@ -39,13 +40,13 @@ export function SearchBox() {
   const updateMovies = (movies) => {
     setMovies(movies)
   }
-  return <Box sx={{
+  return <Container maxWidth="xl" sx={{
     bgcolor: '#cfe8fc',
     height: '100vh'
   }}>
     <SearchBar updateMovies={updateMovies} />
-    <Grid container spacing={0.5}>
-      {movies.map((movie) => (<Movie movie={movie}/>))}
+    <Grid container spacing={3}>
+      {movies.map((movie) => (<Movie movie={movie} />))}
     </Grid>
-  </Box>
+  </Container>
 }

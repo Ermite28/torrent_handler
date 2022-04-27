@@ -25,10 +25,8 @@ class EntryPoint:
         data = json.loads(body)
         print(data)
         print(type(data))
-        #print(f"[x] Received {data['name']}")
-        #print(data['data'])
-        data = {"magnet":"magnet:?xt=urn:btih:A2AD2A669250A014BED19919E6C386DD4F82A883&dn=Eternals.2021.1080p.WEBRip.DDP5.1.x264-NOGRP&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2950%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2870%2Fannounce&tr=udp%3A%2F%2Ftracker.tallpenguin.org%3A15720%2Fannounce&tr=udp%3A%2F%2Ftracker.thinelephant.org%3A12780%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce"}
-        self.events_handler.add_torrent(**data)
+        print(f"[x] Received {data['data'][0]['name']}")
+        self.events_handler.add_torrent(**data['data'][0]['torrents'][1]) # TODO clean that shit
 
 
 if __name__ == "__main__":
