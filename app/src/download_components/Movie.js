@@ -8,6 +8,7 @@ import Collapse from '@mui/material/Collapse';
 import {getMovieTorrents, downloadTorrent} from './api_connectors/torrent_routes';
 
 
+
 export function Movie(props) {
     const { movie, setMovie } = props;
     const [expanded, setExpanded] = React.useState(false);
@@ -22,7 +23,7 @@ export function Movie(props) {
     return (
         <Grid item xs={4}>
             <Card>
-                <Header movie={movie} handleExpandClick handleDownloadClick expanded />
+                <Header movie={movie} handleExpandClick={handleExpandClick} handleDownloadClick={handleDownloadClick} expanded={expanded} />
             <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
         <Typography variant="body2" color="text.secondary">{movie.overview}</Typography>

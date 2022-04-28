@@ -2,10 +2,11 @@ import React from "react";
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
-import DownloadIcon from '@mui/icons-material/Download';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import Modal from "./Popup";
+
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -18,9 +19,7 @@ const ExpandMore = styled((props) => {
     }),
   }));
 
-export default function Header(props, handleExpandClick, handleDownloadClick, expanded) {
-    const [movie, setMovie] = props;
-
+export default function Header(props) {
     return (
         <React.Fragment>
             <CardMedia
@@ -29,20 +28,16 @@ export default function Header(props, handleExpandClick, handleDownloadClick, ex
                     minHeight: "200px"
                 }}
                 compoment="img"
-                image={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
+                image={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${props.movie.poster_path}`}
                 alt="Movie poster" />
             <CardHeader
-                title={movie.title} />
+                title={props.movie.title} />
             <CardActions disableSpacing>
-            <IconButton aria-label="download" onClick={() => {
-                handleDownloadClick();
-            }}>
-                <DownloadIcon />
-            </IconButton>
+                <Modal movie={props.movie}/>
             <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
+                expand={props.expanded}
+                onClick={props.handleExpandClick}
+                aria-expanded={props.expanded}
                 aria-label="show more"
             >
                 <ExpandMoreIcon />
