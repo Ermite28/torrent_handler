@@ -25,8 +25,8 @@ class EntryPoint:
         data = json.loads(body)
         print(data)
         print(type(data))
-        print(f"[x] Received {data['data'][0]['name']}")
-        self.events_handler.add_torrent(**data['data'][0]['torrents'][1]) # TODO clean that shit
+        print(f"[x] Received {data['hash']}")
+        self.events_handler.add_torrent(**data) # TODO clean that shit
 
 
 if __name__ == "__main__":

@@ -1,12 +1,15 @@
 import pika
 import json
-from core.config import settings
+from core.config import Settings
+from functools import lru_cache
 
-
+@lru_cache
+def get_settings():
+    return Settings()
 
 class MessageBroker:
     def __init__(self):
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(settings.RABBITMQ_URL))
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(get_settings().RABBITMQ_URL))
         self.channel = self.connection.channel()
         self._declare_queue()
 
